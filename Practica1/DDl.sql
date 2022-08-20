@@ -521,3 +521,17 @@ CREATE FUNCTION F4
 RETURNS TABLE
 AS
 RETURN (SELECT Id,Date,Description  FROM practica1.HistoryLog)
+
+CREATE FUNCTION F5
+(
+	@ID uniqueidentifier
+)
+RETURNS TABLE
+AS
+	RETURN (
+	SELECT u.Firstname,u.Lastname,u.Email,u.DateOfBirth,p.Credits,r.RoleName FROM practica1.Usuarios u
+	INNER JOIN practica1.ProfileStudent p ON p.UserId = u.Id
+	INNER JOIN practica1.UsuarioRole ur ON ur.UserId = u.Id
+	INNER JOIN practica1.Roles r ON ur.RoleId = r.Id
+	WHERE u.Id = @ID
+	)
