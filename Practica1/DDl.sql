@@ -514,7 +514,46 @@ END
 GO
 
 
+--=====================================================
+--					SP para Validacion de Datos
+--=====================================================
+CREATE PROCEDURE TR6
+AS
+BEGIN
+BEGIN TRANSACTION
+	BEGIN TRY
+				-- Validar letras para usuarios 
+		ALTER TABLE practica1.Usuarios 
+        	ADD CONSTRAINT V_LETRAS_USUARIOS CHECK (Firstname not like '%[^a-zA-Z]%' and Lastname not like '%[^a-zA-Z]%');
+        		-- Validar letras para course
+        ALTER TABLE practica1.Course 
+        	ADD CONSTRAINT V_LETRAS_USUARIOS CHECK (Name not like '%[^a-zA-Z ]%');
+	END TRY
+	BEGIN CATCH
+		ROLLBACK TRANSACTION;
+			INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'la transacción fue fallida para procedimiento TR6')
+	END CATCH
+END
+GO
+
 -------------------------------- Funciones
+
+--=====================================================
+--					Func_course_usuario
+--=====================================================
+CREATE FUNCTION F1
+(
+	@CodCourse INT
+)
+RETURNS TABLE
+AS
+	RETURN 
+		SELECT u.Id, u.Firstname, u.Lastname, u.Email, u.DateOfBirth
+		FROM practica1.Course c
+		INNER JOIN practica1.CourseAssignment ca ON ca.CourseCodCourse = c.CodCourse 
+		INNER JOIN practica1.Usuarios u ON u.Id = ca.StudentId 
+		WHERE c.CodCourse = @CodCourse;
+--
 
 CREATE FUNCTION F4
 ()
