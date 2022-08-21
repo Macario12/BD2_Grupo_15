@@ -573,7 +573,7 @@ AS
 
 CREATE FUNCTION F3
 (
-	@CodUser INT
+	@CodUser VARCHAR(max)
 )
 RETURNS TABLE
 AS
