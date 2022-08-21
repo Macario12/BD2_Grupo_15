@@ -582,7 +582,6 @@ AS
         FROM practica1.Notification AS NO
         INNER JOIN practica1.Usuarios AS U on U.Id = NO.UserId
         WHERE U.Id = @CodUser
-        ORDER BY NO.Date DESC
     )
 
 
