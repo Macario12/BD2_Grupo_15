@@ -555,6 +555,38 @@ AS
 		WHERE c.CodCourse = @CodCourse;
 --
 
+CREATE FUNCTION F2
+(
+	@CodTutor INT
+)
+RETURNS TABLE
+AS
+    RETURN(
+        SELECT C.CodCourse, C.Name
+        FROM practica1.Course C
+        INNER JOIN practica1.CourseTutor AS CT ON C.CodCourse = CT.CourseCodCourse
+        INNER JOIN practica1.Usuarios AS U ON CT.TutorId = U.Id
+        INNER JOIN practica1.TutorProfile AS T ON U.Id = T.UserId
+        WHERE T.Id = @CodTutor
+    )
+
+
+CREATE FUNCTION F3
+(
+	@CodUser INT
+)
+RETURNS TABLE
+AS
+    RETURN(
+        SELECT NO.Message, NO.Date
+        FROM practica1.Notification AS NO
+        INNER JOIN practica1.Usuarios AS U on U.Id = NO.UserId
+        WHERE U.Id = @CodUser
+        ORDER BY NO.Date DESC
+    )
+
+
+
 CREATE FUNCTION F4
 ()
 RETURNS TABLE
