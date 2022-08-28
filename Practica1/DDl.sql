@@ -1,7 +1,7 @@
 --=====================================================
 --					Acciones Tabla Course
 --=====================================================
-CREATE TRIGGER practica1.Trigger1
+ALTER TRIGGER practica1.Trigger1
 ON [practica1].[Course]
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -10,24 +10,31 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla Course')
+				DECLARE @ValorActualizado As Varchar(250)
+				SET @ValorActualizado = (SELECT Name FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+@ValorActualizado+' en la tabla Course')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla Course')
+				DECLARE @ValorInsertado As Varchar(250)
+				SET @ValorInsertado = (SELECT Name FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +@ValorInsertado+' en la tabla Course')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla Course')
+		DECLARE @ValorEliminado As Varchar(250)
+		SET @ValorEliminado = (SELECT Name FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminóel valor '+@ValorEliminado+' en la tabla Course ')
 	END
 END
 GO
 
+
 --=====================================================
 --					Acciones Tabla CourseAssignment
 --=====================================================
-CREATE TRIGGER practica1.Trigger2
+ALTER TRIGGER practica1.Trigger2
 ON [practica1].CourseAssignment
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -36,16 +43,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla CourseAssignment')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla CourseAssignment')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla CourseAssignment')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla CourseAssignment')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla CourseAssignment')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminóel valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla CourseAssignment ')
 	END
 END
 GO
@@ -54,7 +67,7 @@ GO
 --=====================================================
 --					Acciones Tabla CourseTutor
 --=====================================================
-CREATE TRIGGER practica1.Trigger3
+ALTER TRIGGER practica1.Trigger3
 ON [practica1].CourseTutor
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -63,16 +76,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla CourseTutor')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla CourseTutor')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla CourseTutor')
+				DECLARE @ValorInsertado As INT
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla CourseTutor')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla CourseTutor')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla CourseTutor ')
 	END
 END
 GO
@@ -80,7 +99,7 @@ GO
 --=====================================================
 --					Acciones Tabla Notification
 --=====================================================
-CREATE TRIGGER practica1.Trigger4
+ALTER TRIGGER practica1.Trigger4
 ON [practica1].Notification
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -89,16 +108,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla Notification')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla Notification')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla Notification')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla Notification')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla Notification')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla Notification ')
 	END
 END
 GO
@@ -106,7 +131,7 @@ GO
 --=====================================================
 --					Acciones Tabla ProfileStudent
 --=====================================================
-CREATE TRIGGER practica1.Trigger5
+ALTER TRIGGER practica1.Trigger5
 ON [practica1].ProfileStudent
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -115,16 +140,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla ProfileStudent')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla ProfileStudent')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla ProfileStudent')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla ProfileStudent')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla ProfileStudent')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla ProfileStudent ')
 	END
 END
 GO
@@ -132,7 +163,7 @@ GO
 --=====================================================
 --					Acciones Tabla Roles
 --=====================================================
-CREATE TRIGGER practica1.Trigger6
+ALTER TRIGGER practica1.Trigger6
 ON [practica1].Roles
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -141,16 +172,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla Roles')
+				DECLARE @ValorActualizado As varchar(250)
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla Roles')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla Roles')
+				DECLARE @ValorInsertado As varchar(250)
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla Roles')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla Roles')
+		DECLARE @ValorEliminado As varchar(250)
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla Roles ')
 	END
 END
 GO
@@ -158,7 +195,7 @@ GO
 --=====================================================
 --					Acciones Tabla TFA
 --=====================================================
-CREATE TRIGGER practica1.Trigger7
+ALTER TRIGGER practica1.Trigger7
 ON [practica1].TFA
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -167,16 +204,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla TFA')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla TFA')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla TFA')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla TFA')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla TFA')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla TFA ')
 	END
 END
 GO
@@ -184,7 +227,7 @@ GO
 --=====================================================
 --					Acciones Tabla TutorProfile
 --=====================================================
-CREATE TRIGGER practica1.Trigger8
+ALTER TRIGGER practica1.Trigger8
 ON [practica1].TutorProfile
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -193,16 +236,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla TutorProfile')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla TutorProfile')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla TutorProfile')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla TutorProfile')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla TutorProfile')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla TutorProfile ')
 	END
 END
 GO
@@ -210,7 +259,7 @@ GO
 --=====================================================
 --					Acciones Tabla UsuarioRole
 --=====================================================
-CREATE TRIGGER practica1.Trigger9
+ALTER TRIGGER practica1.Trigger9
 ON [practica1].UsuarioRole
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -219,16 +268,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla UsuarioRole')
+				DECLARE @ValorActualizado As int
+				SET @ValorActualizado = (SELECT Id FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla UsuarioRole')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla UsuarioRole')
+				DECLARE @ValorInsertado As int
+				SET @ValorInsertado = (SELECT Id FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla UsuarioRole')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla UsuarioRole')
+		DECLARE @ValorEliminado As int
+		SET @ValorEliminado = (SELECT Id FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla UsuarioRole ')
 	END
 END
 GO
@@ -236,7 +291,7 @@ GO
 --=====================================================
 --					Acciones Tabla Usuarios
 --=====================================================
-CREATE TRIGGER practica1.Trigger10
+ALTER TRIGGER practica1.Trigger10
 ON [practica1].Usuarios
 AFTER INSERT,UPDATE,DELETE
 AS
@@ -245,16 +300,22 @@ BEGIN
 	BEGIN
 		IF EXISTS(SELECT * from DELETED)
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó en la tabla Usuarios')
+				DECLARE @ValorActualizado As varchar(250)
+				SET @ValorActualizado = (SELECT Email FROM DELETED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se actualizó el valor '+CAST(@ValorActualizado as nvarchar)+' en la tabla Roles')
 			END
 		ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó en la tabla Usuarios')
+				DECLARE @ValorInsertado As varchar(250)
+				SET @ValorInsertado = (SELECT Email FROM INSERTED)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se insertó el valor ' +CAST(@ValorInsertado as nvarchar)+' en la tabla Roles')
 			END
     END
 	ELSE
 	BEGIN
-		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó en la tabla Usuarios')
+		DECLARE @ValorEliminado As varchar(250)
+		SET @ValorEliminado = (SELECT Email FROM DELETED)
+		INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'Se eliminó el valor '+CAST(@ValorEliminado as nvarchar)+' en la tabla Usuarios ')
 	END
 END
 GO
@@ -273,11 +334,12 @@ BEGIN
 			IF NOT EXISTS (SELECT 0 FROM practica1.Roles WHERE RoleName = @RoleName)
 			BEGIN
 				INSERT INTO practica1.Roles VALUES(NEWID(),@RoleName)
+				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'la transacción fue exitosa para procedimiento TR4')
 				SELECT 'Ya agregó exitosamente el rol '+@RoleName
 			END 
 			ELSE
 			BEGIN
-				INSERT INTO [practica1].[HistoryLog] VALUES (GETDATE(),'la transacción fue exitosa para procedimiento TR4')
+				
 				SELECT 'Ya existe el rol '+@RoleName
 			END
 		COMMIT TRANSACTION;
@@ -373,7 +435,7 @@ GO
 --=====================================================
 --					SP para actualizacion de estudiante a Tutor.
 --=====================================================
-CREATE PROCEDURE TR2
+CREATE PROCEDURE [dbo].[TR2]
 	@Email varchar(max),
 	@CodCourse int
 AS
@@ -382,7 +444,7 @@ BEGIN TRANSACTION
 		BEGIN TRY
 	IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE Email = @Email)
 	BEGIN
-		IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE EmailConfirmed = 1)
+		IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE EmailConfirmed = 1 AND Email = @Email)
 		BEGIN
 			IF EXISTS (SELECT CodCourse FROM practica1.Course WHERE CodCourse = @CodCourse)
 			BEGIN
@@ -441,6 +503,9 @@ END
 GO
 
 
+
+
+
 --=====================================================
 --					SP para asignaccion de cursos y notificaion.
 --=====================================================
@@ -453,7 +518,7 @@ BEGIN TRANSACTION
 		BEGIN TRY
 	IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE Email = @Email)
 	BEGIN
-		IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE EmailConfirmed = 1)
+		IF EXISTS (SELECT 0 FROM practica1.Usuarios WHERE EmailConfirmed = 1 AND Email = @Email)
 		BEGIN
 
 				-- Se obtiene el usuario
@@ -468,18 +533,18 @@ BEGIN TRANSACTION
 				DECLARE @IdCourse int
 				SET @IdCourse = (SELECT CodCourse FROM practica1.Course WHERE CodCourse = @CodCourse)
 
-				IF EXISTS (SELECT CodCourse FROM practica1.Course WHERE CodCourse = @CodCourse)
+				IF EXISTS (SELECT 0 FROM practica1.Course WHERE CodCourse = @CodCourse)
 				BEGIN
-					IF EXISTS (SELECT CodCourse FROM practica1.Course WHERE CreditsRequired <= @CreditosEstudiante)
+					IF EXISTS (SELECT 0 FROM practica1.Course WHERE CreditsRequired <= @CreditosEstudiante  AND CodCourse = @CodCourse)
 					BEGIN
-						INSERT INTO practica1.CourseAssignment VALUES (@IDUsuario,@CreditosEstudiante)
+						INSERT INTO practica1.CourseAssignment (StudentId,CourseCodCourse) VALUES (@IDUsuario,@CodCourse)
 
 						-- se envia notificación a alumno
 						INSERT INTO practica1.Notification VALUES (@IDUsuario, 'Se a asignado al curso '+CAST(@CodCourse AS nvarchar),GETDATE())
 
 						-- Se obtiene el curso
 						DECLARE @IdTutor uniqueidentifier
-						SET @IdTutor = (SELECT TutorId FROM practica1.CourseTutor WHERE CourseCodCourse = @CodCourse)
+						SET @IdTutor = (SELECT TOP 1 TutorId FROM practica1.CourseTutor WHERE CourseCodCourse = @CodCourse)
 
 						-- se envia notificación a tutor
 						INSERT INTO practica1.Notification VALUES (@IdTutor, 'Se a asignado un estudiante a tu curso '+CAST(@CodCourse AS nvarchar),GETDATE())
@@ -555,9 +620,9 @@ AS
 		WHERE c.CodCourse = @CodCourse;
 --
 
-CREATE FUNCTION F2
+ALTER FUNCTION [dbo].[F2]
 (
-	@CodTutor INT
+	@CodTutor uniqueidentifier
 )
 RETURNS TABLE
 AS
@@ -567,8 +632,9 @@ AS
         INNER JOIN practica1.CourseTutor AS CT ON C.CodCourse = CT.CourseCodCourse
         INNER JOIN practica1.Usuarios AS U ON CT.TutorId = U.Id
         INNER JOIN practica1.TutorProfile AS T ON U.Id = T.UserId
-        WHERE T.Id = @CodTutor
+        WHERE T.UserId = @CodTutor
     )
+GO
 
 
 CREATE FUNCTION F3
