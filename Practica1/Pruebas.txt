@@ -1,0 +1,57 @@
+-- Creacion de Usuarios
+exec TR1 'Prueba4','Prueba4','Prueba4@gmail.com','2002-12-06','12345',13
+-- exec TR1 'Prueba3','Prueba3','Prueba3@gmail.com','2002-12-12','12345',100
+-- Cracion de Cursos
+EXEC TR5 102,'Prueba3',10
+EXEC TR5 33,'Prueba4',12
+EXEC TR5 35,'Prueba5',4
+
+EXEC TR5 22,'Prueba 10',4
+
+update practica1.Usuarios
+set EmailConfirmed = 1
+WHERE Id = 'E5F27051-7413-4C9E-9887-29F265A78734'
+
+-- Cambio de Roles
+exec TR2 'Prueba3@gmail.com',45
+-- Asignacion de Cursos
+EXEC TR3 'Prueba3@gmail.com',45
+-- Creacion de roles
+EXEC TR4 'PruebaRol1'
+EXEC TR4 'PruebaRol2'
+
+-- Validacion de datos
+EXEC TR6
+
+-- Funciones
+SELECT * FROM  F1(45)
+SELECT * FROM  F2('B31D8E69-19C8-4281-85AE-25967C7873F5')
+SELECT * FROM  F3('B31D8E69-19C8-4281-85AE-25967C7873F5')
+SELECT * FROM  F4()
+
+SELECT * FROM practica1.Usuarios
+
+SELECT * FROM  F5('B31D8E69-19C8-4281-85AE-25967C7873F5')
+
+SELECT * FROM practica1.HistoryLog;
+SELECT * FROM practica1.ProfileStudent;
+SELECT * FROM practica1.Usuarios;
+SELECT * FROM practica1.TFA;
+SELECT * FROM practica1.UsuarioRole;
+SELECT * FROM practica1.Roles;
+SELECT * FROM practica1.Notification;
+SELECT * FROm practica1.TutorProfile;
+SELECT * FROM practica1.CourseTutor;
+SELECT * FROM practica1.Course;
+SELECT * FROM practica1.CourseAssignment;
+
+SELECT * FROM practica1.Usuarios;
+
+exec TR1 'Prueba','Prueba','Prueba@gmail.com','2002-12-01','123',12
+update practica1.Usuarios
+set EmailConfirmed = 1
+WHERE Id = '71605490-A49F-47B2-8EC4-303DFC89E1FE'
+exec TR2 'Prueba@gmail.com',45
+
+
+INSERT INTO practica1.CourseAssignment VALUES ('71605490-A49F-47B2-8EC4-303DFC89E1FE',45)
