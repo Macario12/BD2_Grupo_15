@@ -35,14 +35,6 @@ SET @@session.lc_time_names=0/*!*/;
 SET @@session.collation_database=DEFAULT/*!*/;
 /*!80011 SET @@session.default_collation_for_utf8mb4=255*//*!*/;
 /*!80016 SET @@session.default_table_encryption=0*//*!*/;
-/*!*/;
-# at 372
-#220920 18:57:32 server id 1  end_log_pos 451 CRC32 0x4adecc24 	Anonymous_GTID	last_committed=1	sequence_number=2	rbr_only=no	original_committed_timestamp=1663700252273358	immediate_commit_timestamp=1663700252273358	transaction_length=286
-# original_commit_timestamp=1663700252273358 (2022-09-20 18:57:32.273358 UTC)
-# immediate_commit_timestamp=1663700252273358 (2022-09-20 18:57:32.273358 UTC)
-/*!80001 SET @@session.original_commit_timestamp=1663700252273358*//*!*/;
-/*!80014 SET @@session.original_server_version=80030*//*!*/;
-/*!80014 SET @@session.immediate_server_version=80030*//*!*/;
 SET @@SESSION.GTID_NEXT= 'ANONYMOUS'/*!*/;
 # at 451
 #220920 18:57:32 server id 1  end_log_pos 658 CRC32 0xe8a75538 	Query	thread_id=15	exec_time=0	error_code=0	Xid = 52
