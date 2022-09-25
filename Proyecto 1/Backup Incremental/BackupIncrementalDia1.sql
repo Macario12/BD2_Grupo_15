@@ -35,7 +35,6 @@ SET @@session.lc_time_names=0/*!*/;
 SET @@session.collation_database=DEFAULT/*!*/;
 /*!80011 SET @@session.default_collation_for_utf8mb4=255*//*!*/;
 /*!80016 SET @@session.default_table_encryption=0*//*!*/;
-CREATE DATABASE Proyecto2Bases
 /*!*/;
 # at 372
 #220920 18:57:32 server id 1  end_log_pos 451 CRC32 0x4adecc24 	Anonymous_GTID	last_committed=1	sequence_number=2	rbr_only=no	original_committed_timestamp=1663700252273358	immediate_commit_timestamp=1663700252273358	transaction_length=286
