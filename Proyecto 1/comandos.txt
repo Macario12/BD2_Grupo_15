@@ -12,10 +12,23 @@ sudo docker exec -it f93b mysqldump -u root -p Proyecto2Bases > fullBackupDia3.s
 sudo docker exec -it f93b mysqldump -u root -p Proyecto2Bases > fullBackupDia4.sql
 sudo docker exec -it f93b mysqldump -u root -p Proyecto2Bases > fullBackupDia5.sql
 
+-- generar backup incremental
 sudo docker exec -it f93b mysqlbinlog "/var/lib/mysql/binlog.000002" > "BackUpIncrementalDia1.sql"
 sudo docker exec -it f93b mysqlbinlog "/var/lib/mysql/binlog.000004" > "BackUpIncrementalDia2.sql"
 sudo docker exec -it f93b mysqlbinlog "/var/lib/mysql/binlog.000006" > "BackUpIncrementalDia3.sql"
 sudo docker exec -it f93b mysqlbinlog "/var/lib/mysql/binlog.000007" > "BackUpIncrementalDia4.sql"
 sudo docker exec -it f93b mysqlbinlog "/var/lib/mysql/binlog.000008" > "BackUpIncrementalDia5.sql"
 
+----------- Restaurar fullbackup
 sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < fullBackupDia1.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < fullBackupDia2.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < fullBackupDia3.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < fullBackupDia4.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < fullBackupDia5.sql
+
+----------- Restaurar backup incremental
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < BackupIncrementalDia1.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < BackupIncrementalDia2.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < BackUpIncrementalDia3.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < BackUpIncrementalDia4.sql
+sudo docker exec -i f93b mysql -u root --password=my-bases2 -p Proyecto2Bases < BackUpIncrementalDia5.sql
