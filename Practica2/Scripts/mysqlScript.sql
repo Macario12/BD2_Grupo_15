@@ -160,12 +160,11 @@ SELECT "Geriátrico" AS CATEGORIA, COUNT(*) AS TOTAL FROM PACIENTE WHERE edad > 
 -- ============================
 -- ======== CONSULTA 2 ========
 -- ============================
-SELECT HABITACION.idHabitacion AS HABITACION, count(*) AS TOTAL FROM LOG_ACTIVIDAD
+SELECT distinct HABITACION.idHabitacion AS HABITACION, count(DISTINCT PACIENTE.idPaciente) AS TOTAL FROM LOG_ACTIVIDAD
 INNER JOIN PACIENTE ON PACIENTE.idPaciente = LOG_ACTIVIDAD.PACIENTE_idPaciente
 INNER JOIN HABITACION ON HABITACION.idHabitacion = LOG_ACTIVIDAD.HABITACION_idHabitacion
 GROUP BY HABITACION.idHabitacion
 ORDER BY TOTAL DESC;
-
 
 -- ============================
 -- ======== CONSULTA 3 ========
@@ -216,7 +215,7 @@ LIMIT 5;
 -- ============================
 -- ======== CONSULTA 8 ========
 -- ============================
-SELECT LOG_ACTIVIDAD.timestampx AS FECHA, COUNT(*) AS TOTAL FROM LOG_ACTIVIDAD
+SELECT LOG_ACTIVIDAD.timestampx AS FECHA, COUNT(DISTINCT PACIENTE_idPaciente ) AS TOTAL FROM LOG_ACTIVIDAD
 GROUP BY LOG_ACTIVIDAD.timestampx
 ORDER BY TOTAL DESC
 LIMIT 1;
