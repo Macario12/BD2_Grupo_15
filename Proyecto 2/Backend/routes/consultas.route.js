@@ -10,5 +10,7 @@ api.get('/Consulta5', controller.consulta5);
 api.get('/Consulta6', controller.consulta6);
 api.get('/Consulta7', controller.consulta7);
 api.get('/Consulta8', controller.consulta8);
+api.get('/Consulta9', controller.consulta9);
+api.get('/Consulta10', controller.consulta10);
 
 module.exports = api;
