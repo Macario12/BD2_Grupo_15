@@ -2,8 +2,6 @@ class xd():
     def add(self, path):
         file = open(path, "r")
         file2 = open("LogActividades13.csv", "a")
-        cont = 0
-        cont2 = 0
         arr = []
         for x in file:
             arr = x.split(",")

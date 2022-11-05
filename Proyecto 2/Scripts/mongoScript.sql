@@ -2,8 +2,6 @@
 
 sudo docker run -dp 27017:27017 -v mongoDB:/data/db --name mongoDB mongo
 
-sudo docker exec -it mongoDB bash
-
 sudo docker cp "/home/germanpc9/BD2_Grupo_15/Practica2/Archivos de entrada - CSV/Pacientes.csv" mongoDB:/tmp
 sudo docker cp "/home/germanpc9/BD2_Grupo_15/Practica2/Archivos de entrada - CSV/Habitaciones.csv" mongoDB:/tmp
 sudo docker cp "/home/germanpc9/BD2_Grupo_15/Practica2/Archivos de entrada - CSV/LogHabitaciones.csv" mongoDB:/tmp
@@ -11,6 +9,8 @@ sudo docker cp "/home/germanpc9/BD2_Grupo_15/Practica2/Archivos de entrada - CSV
 sudo docker cp "/home/germanpc9/BD2_Grupo_15/Practica2/Archivos de entrada - CSV/LogActividades2.csv" mongoDB:/tmp
 
 =========================== CARGA MASIVA ==================== 
+
+sudo docker exec -it mongoDB bash
 
 mongoimport -d Practica2 -c Pacientes --type=csv --headerline --file /tmp/Pacientes.csv
 mongoimport -d Practica2 -c Habitaciones --type=csv --headerline --file /tmp/Habitaciones.csv
@@ -208,3 +208,9 @@ db.Log_Actividad.aggregate([
         $limit:1
     }
 ]);
+
+=========================== GENERAL 1 ====================
+db.Pacientes.find().pretty();
+
+=========================== GENERAL 2 ====================
+db.Habitaciones.find().pretty();
