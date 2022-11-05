@@ -219,3 +219,13 @@ SELECT LOG_ACTIVIDAD.timestampx AS FECHA, COUNT(DISTINCT PACIENTE_idPaciente ) A
 GROUP BY LOG_ACTIVIDAD.timestampx
 ORDER BY TOTAL DESC
 LIMIT 1;
+
+-- ============================
+-- ======== CONSULTA 9 ========
+-- ============================
+SELECT * FROM PACIENTE;
+
+-- ============================
+-- ======== CONSULTA 10 ========
+-- ============================
+SELECT * FROM HABITACION;

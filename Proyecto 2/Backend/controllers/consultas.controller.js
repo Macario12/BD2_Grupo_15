@@ -2,8 +2,8 @@ var conexion = require("../database/exec");
 const redis = require("redis");
 const { v4: uuidv4 } = require("uuid");
 const client = redis.createClient({ url: "redis://34.125.60.110:6379" });
-client.on("error", (err) => console.log("Redis Client Error", err));
 
+client.on("error", (err) => console.log("Redis Client Error", err));
 async function consulta1(req, res) {
   const consulta = `SELECT "Pediátrico" AS CATEGORIA, COUNT(*) AS TOTAL FROM PACIENTE WHERE edad < 18
 UNION
@@ -13,8 +13,9 @@ SELECT "Geriátrico" AS CATEGORIA, COUNT(*) AS TOTAL FROM PACIENTE WHERE edad > 
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 1 " + "Fecha " + now.toUTCString());
+  await client.set("query1", "consulta 1 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -30,7 +31,8 @@ ORDER BY TOTAL DESC;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 2 " + "Fecha " + now.toUTCString());
+  await client.set("query2", "consulta 2 " + "Fecha " + now.toUTCString());
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -41,8 +43,9 @@ ORDER BY TOTAL DESC;`;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 3 " + "Fecha " + now.toUTCString());
+  await client.set("query3", "consulta 3 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -54,8 +57,9 @@ LIMIT 5;`;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 4 " + "Fecha " + now.toUTCString());
+  await client.set("query4", "consulta 4 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -67,8 +71,9 @@ LIMIT 5;`;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 5 " + "Fecha " + now.toUTCString());
+  await client.set("query5", "consulta 5 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -82,8 +87,9 @@ LIMIT 5;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 6 " + "Fecha " + now.toUTCString());
+  await client.set("query6", "consulta 6 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -97,8 +103,9 @@ LIMIT 5;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 7 " + "Fecha " + now.toUTCString());
+  await client.set("query7", "consulta 7 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -110,8 +117,9 @@ LIMIT 1;`;
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 8 " + "Fecha " + now.toUTCString());
+  await client.set("query8", "consulta 8 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -120,8 +128,9 @@ async function consulta9(req, res) {
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 9 " + "Fecha " + now.toUTCString());
+  await client.set("query9", "consulta 9 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
@@ -130,8 +139,9 @@ async function consulta10(req, res) {
   await client.connect();
   let now = new Date();
   const uuid = uuidv4().toString();
-  await client.set(uuid, "consulta 10 " + "Fecha " + now.toUTCString());
+  await client.set("query10", "consulta 10 " + "Fecha " + now.toUTCString());
   const respuesta = await conexion.execute(consulta);
+  client.disconnect()
   return res.status(200).send(respuesta.result);
 }
 
