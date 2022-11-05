@@ -1,4 +1,4 @@
-﻿timestamp,actividad,idHabitacion,idPaciente
+﻿timestampx,actividad,idHabitacion,idPaciente
 6/28/2021 8:49:28 AM,Paciente recibe papeleria en recepcion.,10,128890
 6/28/2021 8:49:41 AM,Medico inicia con el tratamiento del paciente.,12,183875
 6/28/2021 8:50:50 AM,Paciente entrega papeleria.,12,154343
